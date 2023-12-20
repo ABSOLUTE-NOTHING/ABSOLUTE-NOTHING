@@ -1,0 +1,495 @@
+=========================================== CMD ===============================================================
+
+1. Clone - cloning a repository on our local machine.
+
+    cmd  ==>  git clone <- remote repo's link -> Repo
+
+        Note =>     <remote> -  Github
+                    <local> - Laptop / PCs
+
+                    Here,
+                    1. Local machines are the machines on which we are currently working on.
+                    2. Remote machines / github, contains the Folders / projects / files we want to work on,
+
+        Example =>  Input :
+                    PS C:\Users\Administrator\Desktop\Workspace\gitDemo> git clone https://github.com/ABSOLUTE-NOTHING/Demo.git
+
+                    Output :
+                    All content (ReadMe.md file for above example) inside the Demo.git will be stored in a folder named as Demo (same as the repo [Demo.git] name).
+
+        Extra's => 1. ls : to display list of files inside the current directory / folder.
+                   2. ls -Hidden / ls -a : to display hidden files.
+
+
+2. status - displays the state of the code.
+
+    cmd  ==>  git status
+
+    Types of status :
+
+    1. untracked - new files that git doesn't yet tracked.
+
+    2. modified - changed.
+
+    3. staged - file is ready to be commited.
+
+    4. unmodified - unchanged.
+
+        Note => 
+        firstly, a repo can be in created / unmodified state.
+        then, from that state it can either be --> modified (changed or modified a content).
+                                               --> untracked (new file created).
+        then, we use "git add <file>..." to take it to staged (ready to commit) state.
+        and finally, we use "git commit -a" to commit the local repo's changes and takes it to unchanged (commit) state.
+
+        Example => Input :
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git status
+
+                   Output : 
+                   
+                   /// (1. If it is still unmodified / we didn't made any changes inside the local repo) 
+
+                   On branch main
+                   Your branch is up to date with 'origin/main'.
+
+                   nothing to commit, working tree clean        
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> 
+
+                   /// (1. If it is modified / we made changes inside the local repo) 
+                    ( // comment
+                        In this example, 
+                        Changes :
+                        1. we modified the REadMe.md file.
+                        2. Created a new html file named as index.html. 
+                    )
+
+                    On branch main
+                    Your branch is up to date with 'origin/main'.
+
+                    Changes not staged for commit:
+                      (use "git add <file>..." to update what will be committed)
+                      (use "git restore <file>..." to discard changes in working directory)
+                            modified:   README.md
+
+                    Untracked files:
+                      (use "git add <file>..." to include in what will be committed)
+                            index.html
+
+                    no changes added to commit (use "git add" and/or "git commit -a")
+                    PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo>
+
+3. add - add new or changed files in your working directory to the Git staging area.
+    
+    cmd  ==>  git add <- file name -> 
+
+        Note => 1. It is the staging area before commiting (ready to commit area).
+                2. we can also use "git restore --staged <file>..." to unstage the staged files.
+                   
+        (refer the above examples)
+        Example 1  => Input :
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git add index.html
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git status
+
+                   Output : 
+                   On branch main
+                   Your branch is up to date with 'origin/main'.      
+
+                   Changes to be committed:
+                     (use "git restore --staged <file>..." to unstage)
+                           new file:   index.html
+
+                   Changes not staged for commit:
+                     (use "git add <file>..." to update what will be committed)
+                     (use "git restore <file>..." to discard changes in working directory)
+                           modified:   README.md
+
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo>
+
+        ( use "git add ." to add all changes at once)
+        Example 2  => Input :
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git add .
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git status       
+
+                   Output : 
+                   On branch main
+                   Your branch is up to date with 'origin/main'.
+
+                   Changes to be committed:
+                     (use "git restore --staged <file>..." to unstage)
+                           modified:   README.md
+                           new file:   index.html
+
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo>
+
+        Example 3  => Input :
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git add index.html
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git add README.md 
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git status       
+
+                   Output : 
+                   On branch main
+                   Your branch is up to date with 'origin/main'.
+
+                   Changes to be committed:
+                     (use "git restore --staged <file>..." to unstage)
+                           modified:   README.md
+                           new file:   index.html
+
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo>
+
+4. commit - it is the record of change.
+    
+    cmd  ==> git commit -m "some message"
+
+        Note => 1. -m --> message
+                2. message should contain a meaningfull difference 
+
+        Example => Input :
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git commit -m "added new index.
+                   html file and changes in readme"
+                   
+                   Output :
+                   [main a98ad68] added new index.html file and changes in readme
+                    2 files changed, 1 insertion(+), 1 deletion(-)
+                    create mode 100644 index.html
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> 
+
+                   Input to check : 
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git status
+                   
+                   Output :
+                   On branch main
+                   Your branch is ahead of 'origin/main' by 1 commit.
+                     (use "git push" to publish your local commits)
+
+                   nothing to commit, working tree clean
+                   PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> 
+
+5. push - upload local repo content to remote repo
+
+    cmd   ==>  git push origin main
+
+        Note => 1. git push - means we want to push the code through git.
+                2. origin - 
+                   --> The [ choosen / specific / original / remote ] repo, which is duplicated (using git clone <-remote repo link->) from remote to local machine. 
+                   
+                   --> Origin points to the remote repo where we are going to push (replace with the original) the newly commited code with aboce cmd.
+
+                3. main - means the branch of the original repo on which we are going to push the code
+
+                
+                
+        Example => Input :
+                PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> git push origin main
+
+                Output :   
+                Enumerating objects: 9, done.
+                Counting objects: 100% (9/9), done.
+                Delta compression using up to 4 threads
+                Compressing objects: 100% (5/5), done.
+                Writing objects: 100% (7/7), 689 bytes | 689.00 KiB/s, done.
+                Total 7 (delta 0), reused 0 (delta 0), pack-reused 0
+                To https://github.com/ABSOLUTE-NOTHING/Demo.git
+                   0f4d46a..715c5cc  main -> main
+                PS C:\Users\Administrator\Desktop\Workspace\gitDemo\Demo> 
+
+                // above lines means that the local repo has been successfully pushed. 
+
+6. init - used to create a new git repo.
+
+    Extra's => 1. cd - change directory to ....
+               2. cd .. - to get out from the current directry.
+               3. mkdir - create a new folder / directory. 
+               4. ls - gives list of files in the current directory.
+
+    Steps => 1. git init  
+                    - used to initialize the git.
+             2. git remote add origin <-link->
+                    - used to set the repo to the origin.
+                    - Note :
+                      + remote add (want to add new remote github repo).
+                      + origin (name of the repo, a secondary name).
+                      + <-link-> (link generate while creating a new repo in github).
+                    - Example :
+                     Input => git remote add origin https://github.com/ABSOLUTE-NOTHING/ABSOLUTE-NOTHING.git
+             3. git remote -v (to verify remote)
+                    - used to display the repo in the origin (repo from which we will fetch or push the code).
+                    - Example :
+                     Input => 
+                          PS C:\Users\Administrator\Desktop\Workspace\gitDemo\localrepo> git remote -v
+                    
+                     Output =>
+                          origin  https://github.com/ABSOLUTE-NOTHING/ABSOLUTE-NOTHING.git (fetch)
+                          origin  https://github.com/ABSOLUTE-NOTHING/ABSOLUTE-NOTHING.git (push)
+             4. git branch (to check branch)
+                    - used to chech the branch.
+                    - Note :
+                      + branch is the duplicate copies of original main branch.
+                    - Example :
+                     Input => 
+                        PS C:\Users\Administrator\Desktop\Workspace\gitDemo\localrepo> git branch 
+
+                     Output => // branch name is displayed, default name will be master
+                        * master
+                    
+             5. git branch -M main (to rename branch)
+                    - used to rename a current branch.
+                    - Note :
+                      + here,in the cmd [git branch -M main] instead of main we can also put any other name.
+                    - Example :
+                     Input => 
+                        PS C:\Users\Administrator\Desktop\Workspace\gitDemo\localrepo> git branch -M main 
+                        PS C:\Users\Administrator\Desktop\Workspace\gitDemo\localrepo> git branch 
+                     
+                     Output => // here we renamed the master branch as main. 
+                        * main
+                        
+             6. git push origin main  
+                    - pushes the local repo to remote repo
+                    - we can aslo use git push -u origin main
+
+
+==================================== Work Flow ===========================================================
+
+ON LOCAL GIT
+
+                                   Github repo
+                                        |
+                                        V
+                                      Clone
+                                        |
+                                        V
+                                     Changes
+                                        |
+                                        V
+                                       ADD
+                                        |
+                                        V
+                                      COMMIT
+                                        |
+                                        V
+                                       PUSH
+                                      
+                                      
+================================== Git Branches ========================================================
+
+Note :
+
+- Branching allows teams to concurrently work on different  [ features / bug fix / other works ] by taking the master or main branch as the base.
+
+- This creates different versions from main branch, or we can say several paths with their own uniqueness but using the original starting point (eg. main file) as their base.
+
+- The git branch command lets you create, list, rename, and delete branches
+
+- At a point we can even merge different branches as one too.
+
+- It doesn't let you switch between branches or put a forked history back together again. For this reason, git branch is tightly integrated with the git checkout and git merge commands.
+
+                               --------------------------------------
+                                          BRANCH COMMANDS            
+                               --------------------------------------
+
+1. git branch  (to check branch)
+   
+   Example => Input : 
+                       git branch
+              Output :
+                       * master                
+ 
+2. git branch -M main  (to rename branch).
+   
+   Example => Input : 
+                       git branch -M main
+                       git branch
+              Output :
+                       * main                
+
+3. git checkout <-branch name->  (to navigate / to switch the branches [hikdun tikde]).
+
+   Example => Input : 
+                       git checkout main
+              Output :
+                       Switched to branch 'main'
+                       Your branch is up to date with 'origin/main'.
+
+4. git checkout -b <-new branch name->  (to create a new branch).
+
+   Example => Input : 
+                       git checkout -b feature1
+              Output :
+                       Switched to a new branch 'feature1'   
+
+5. git branch -d <-branch name->  (to delete branch).
+
+(Remember : delete the branch after switching to a different branch or you will see an error, refer example1).
+   Example 1 => Input : 
+                       git branch -d feature2
+                Output :
+                       error: cannot delete branch 'feature2' used by worktree at 'C:/Users/Administrator/Desktop/Workspace/gitDemo/localrepo'
+                       
+   Example 2 => Input : 
+                       git branch -d feature2
+                Output :
+                       Deleted branch feature2 (was 1c13f9a).
+
+
+============================================ Pull command ===================================================
+
+  cmd  =>  git pull origin main
+
+  Note : Used to fetch and download content from a remote repo and immediately update the local repo to match that content.
+
+
+============================================ Merging Code ===================================================
+
+WAY 1 : (through command line)
+
+        git diff <-branch name->     (to compare commits, branches, files & more)
+
+        Note : 1. - sign indicates the code which is deleted or not present in the other branch.
+               2. + sign indicates code which is added or a extra feature in the other branch.
+
+        git merge <-branch name->     (to merg 2 branches)
+
+        Note : 1. Mostly conflicts arise at these parts. So, try to resolve them before merging. 
+               2. before merging, add and commit all changes of that branch (feature).
+               3. Merge the changes of branches (features) to the main.   
+
+WAY 2 : (through Github)
+
+        Create a PR (Pull Request)
+
+        Note : Pull Request => 
+          It lets you tell others about changes you've pushed to a branch in a repository on Github.
+
+        Steps : 
+          1. Get in the pull request section of the repositary.
+          2. click on new (to create a new pull request).
+          3. (Below points are the managers point of view or the owner of the github repo)
+             a. we will resolve conflicts (if any).
+             b. confirm merge.
+
+          andd All set 😎.
+         
+
+================================= Resolving Merge Conflicts ==========================================
+
+Note : An event that takes place when Git is unable to automatically resolve 
+       differences in code between two conflicts.
+
+Ways : 1. Pull request.
+       2. git merge <-branch name->
+
+Note 2 : We can resolve conflicts in 4 ways :
+        a. Accept current changes. (keep the original code).
+        b. Accept Incoming changes. (update the code with, merging branch's changes [eg. feature]).
+        c. Accept Both changes. (keeping both codes, both the original and new changes).
+        d. Manually select which changes should be kept or updated. (My favourite, koi jhanjat hi nahi).
+         
+
+========================================= Undoing Changes ================================================
+
+Note : cmd => git log (to display all commits from history)
+       
+       Example => 
+          Input : git log
+
+          Output : 
+            commit 10738e80447c9ed31640473154fc3ae516d1ab8e (HEAD -> main)
+            Author: ABSOLUTE-NOTHING <sairajmane2004@gmail.com>
+            Date:   Wed Dec 20 21:47:03 2023 +0530
+
+                first commit
+
+            commit 77af1ef18ff77186cbf6a3a129a24d9aba3ed1a6 (origin/main)
+            Merge: 7cbb886 7c35a3b
+
+       INFO : Here, the hash code after the commit [77af1ef18ff77186cbf6a3a129a24d9aba3ed1a6]
+              is an example of the hash code used in the [git reset <-hash code->]
+
+Case 1 : staged changes 
+ 
+    cmd  =>  1. git reset <-file name->    (to unstage a specific added file).
+             2. git reset                  (to unstage all added files).
+
+    Example => Input 1 :  git status
+
+               Output 1 :
+                  On branch main
+
+                  Changes not staged for commit:
+                    (use "git add <file>..." to update what will be committed)
+                    (use "git restore <file>..." to discard changes in working directory)
+                          modified:   index.html
+
+                  no changes added to commit (use "git add" and/or "git commit -a")
+                  
+               Input 2 : git add .
+                                    
+               Input 3 : git reset index.html
+                         ----- or ------
+                         git reset 
+
+               Output 3 : 
+                  Unstaged changes after reset:
+                  M       index.html
+
+Case 2. : commited changes (for one commit)
+         
+    cmd  =>  git reset HEAD~1
+
+    Example => Input 1 : git add .
+                         git commit -m "added hy"
+
+               Output 1 : 
+                    [main dcdc1b8] added hy
+                    1 file changed, 1 insertion(+)
+
+               Input 2 : git reset HEAD~1
+
+               Output 2 : 
+                    Unstaged changes after reset:
+                    M       index.html
+
+Case 3. : commited changes (for many commits)
+
+    cmd  =>  1. git reset <-commit hash->          (reset the HEAD to the specific hash / commit instance).
+             2. git reset --hard <-commit hash->   (reset the entire content of the current local repo
+                                                    and git to the specific hash's / commit's content).
+
+    Example => Input 1 : git reset 77af1ef18ff77186cbf6a3a129a24d9aba3ed1a6
+
+               Output 1 :
+                  Unstaged changes after reset:
+                  M       index.html
+
+               Input 2 : git log
+
+               Output 2 :
+                  commit 77af1ef18ff77186cbf6a3a129a24d9aba3ed1a6 (HEAD -> main, origin/main)
+                  Merge: 7cbb886 7c35a3b
+                  Author: ABSOLUTE-NOTHING <116956963+ABSOLUTE-NOTHING@users.noreply.github.com>
+                  Date:   Wed Dec 20 19:27:14 2023 +0530
+
+                      Merge pull request #1 from ABSOLUTE-NOTHING/feature1
+
+                      added a new feature
+
+               Alternate Input : git reset --hard 77af1ef18ff77186cbf6a3a129a24d9aba3ed1a6
+
+               Output : HEAD is now at 77af1ef Merge pull request #1 from ABSOLUTE-NOTHING/feature1
+
+
+============================================== Fork ====================================================
+
+Note : A Fork is a new repository that shares code and visibility settings 
+       with the original "upstream" repository.
+
+       Fork is a rough copy.
+
+
+
+
+
+
+
